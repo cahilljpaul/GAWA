@@ -1,4 +1,6 @@
 import SwiftUI
+import FirebaseFirestore
+import FirebaseAuth
 
 struct TeamSelectorView: View {
     let sports = ["Football", "Hurling", "Camogie"]
@@ -26,7 +28,20 @@ struct TeamSelectorView: View {
                     }
                 }
             }
+
+            Button("Save to Account") {
+                saveFollowedTeam(sport: followedSport, team: followedTeam)
+            }
         }
         .navigationTitle("Follow a Team")
+    }
+
+    func saveFollowedTeam(sport: String, team: String) {
+        guard let userId = Auth.auth().currentUser?.uid else { return }
+        let db = Firestore.firestore()
+        db.collection("users").document(userId).setData([
+            "followedSport": sport,
+            "followedTeam": team
+        ])
     }
 }

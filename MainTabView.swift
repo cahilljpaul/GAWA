@@ -1,10 +1,3 @@
-//
-//  MainTabView.swift
-//  GAWA
-//
-//  Created by Paul Cahill on 04/05/2025.
-//
-
 import SwiftUI
 
 struct MainTabView: View {

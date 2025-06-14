@@ -1,17 +1,20 @@
-//
-//  GAWAApp.swift
-//  GAWA
-//
-//  Created by Paul Cahill on 04/05/2025.
-//
-
 import SwiftUI
+import FirebaseCore
+import FirebaseAuth
 
 @main
 struct GAAApp: App {
+    init() {
+        FirebaseApp.configure()
+    }
+
     var body: some Scene {
         WindowGroup {
-            MainTabView()  // ← Replaces ContentView()
+            if Auth.auth().currentUser == nil {
+                LoginView()
+            } else {
+                MainTabView()
+            }
         }
     }
 }
